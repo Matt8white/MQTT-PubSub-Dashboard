@@ -1,1 +1,93 @@
-# MQTT-SenderDashboard
+# MQTT-PubSub Dashboard
+Simple publisher-subscriber in python with the purpose of sending a machine diagnostic 
+remotely to a server which will store all the collected information in Graphite,
+used to track the performance of the sender. The information can be displayed in
+a dashboard using Grafana.
+
+## Installation
+First of all you need to install an MQTT message broker
+
+For macOS
+```
+brew install mosquitto
+```
+then you need to install a python module which will manage the MQTT client, for 
+example paho mqtt:
+```
+pip install paho-mqtt
+```
+Then you just need to run `python subscriber.py` on the server and 
+`python publisher.py` on the sender machine.
+
+
+In order to correctly store and plot the information sent by the publisher you 
+need to install on the server the following:
+
+### Dependencies
+#### Install Cairo and related
+For macOS
+```
+brew install cairo
+brew install py2cairo
+```
+#### Install Django
+```
+pip install Django==1.5
+pip install django-tagging
+```
+
+### Graphite
+```
+pip install carbon
+pip install whisper
+pip install graphite-web
+pip install Twisted==11.1.0 
+
+chown -R <your username>:staff /opt/graphite
+```
+
+#### Configuration
+Create in `/opt/graphite/conf` configuration files for carbon and for the 
+storage schema of the DB. You can use the default ones by using this:
+```
+cp /opt/graphite/conf/carbon.conf{.example,}
+cp /opt/graphite/conf/storage-schemas.conf{.example,}
+```
+You can also modify them in order to change things like the frequency at which 
+the data is stored in the DB
+
+#### Create default DB
+
+```
+cd /opt/graphite/webapp/graphite
+
+# Modify this file to change database backend (default is sqlite).
+cp local_settings.py{.example,}
+
+# Initialize database
+python manage.py syncdb
+```
+
+#### Start Carbon and Graphite
+
+```
+python /opt/graphite/bin/carbon-cache.py start
+
+# You may need to add to the env paths the folder
+# export PYTHONPATH="/opt/graphite/webapp"
+python /opt/graphite/bin/run-graphite-devel-server.py /opt/graphite
+```
+
+Go to `http://localhost:8080` to see if Graphite is properly running
+
+### Grafana
+Refer to [download guide](https://grafana.com/grafana/download)
+
+#### Start server
+```
+grafana-server -homepath /usr/local/share/grafana/
+```
+With Grafana server up and running you just need to access 
+`http://localhost:3000` and
+- Add Graphite as data source
+- Create your custom dashboards
