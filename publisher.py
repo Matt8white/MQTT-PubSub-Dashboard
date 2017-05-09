@@ -6,11 +6,15 @@ import psutil
 
 # Input parser
 parser = argparse.ArgumentParser()
+parser.add_argument('--mqtt_usr', type=str, default="test")
+parser.add_argument('--mqtt_pwd', type=str, default="acaproj")
 parser.add_argument('--mqtt_address', type=str, default="localhost")
 parser.add_argument('--mqtt_port', type=int, default=1883)
 parser.add_argument('--run_time', type=int, default=0)
 args = parser.parse_args()
 
+mqtt_usr = args.mqtt_usr
+mqtt_pwd = args.mqtt_pwd
 mqtt_address = args.mqtt_address
 mqtt_port = args.mqtt_port
 run_time = args.run_time
@@ -20,6 +24,7 @@ if run_time == 0:
     
 # Connecting to MQTT message broker
 client = mqtt.Client()
+client.username_pw_set(mqtt_usr, mqtt_pwd)
 client.connect(mqtt_address, mqtt_port, 60)
 
 start_time = int(time.time())
@@ -32,5 +37,5 @@ while int(time.time()) - start_time < run_time:
     time.sleep(1)
 
 # Shut all the listening subscribers and disconnects itself
-client.publish("topic/status", "Quit")
+client.publish("main/status", "Quit")
 client.disconnect()

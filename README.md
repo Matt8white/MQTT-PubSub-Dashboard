@@ -11,7 +11,9 @@ For macOS
 ```
 brew install mosquitto
 ```
-then you need to install a python module which will manage the MQTT client, for 
+In order to enable password protection see [this link](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-debian-8)
+
+Then you need to install a python module which will manage the MQTT client, for 
 example paho mqtt:
 ```
 pip install paho-mqtt

@@ -4,12 +4,16 @@ import socket
 
 # Input parser
 parser = argparse.ArgumentParser()
+parser.add_argument('--mqtt_usr', type=str, default="test")
+parser.add_argument('--mqtt_pwd', type=str, default="acaproj")
 parser.add_argument('--mqtt_address', type=str, default="localhost")
 parser.add_argument('--mqtt_port', type=int, default=1883)
 parser.add_argument('--carbon_address', type=str, default="127.0.0.1")
 parser.add_argument('--carbon_port', type=int, default=2003)
 args = parser.parse_args()
 
+mqtt_usr = args.mqtt_usr
+mqtt_pwd = args.mqtt_pwd
 mqtt_address = args.mqtt_address
 mqtt_port = args.mqtt_port
 carbon_address = args.carbon_address
@@ -51,12 +55,8 @@ def on_connect(client, userdata, flags, rc):
     Nothing
     """
     print("Connected with result code " + str(rc))
-    client.subscribe([("topic/cpu", 0),
-                      ("topic/memory", 0),
-                      ("topic/disk_usage", 0),
-                      ("topic/disk_reads", 0),
-                      ("topic/disk_writes", 0),
-                      ("topic/status", 0)])
+    client.subscribe([("topic/#", 0),
+                      ("main/status", 0)])  # If you want you can subscribe to every CPU topic in this way: 'analytics/+/cpu'
 
 
 def on_message(client, userdata, msg):
@@ -73,7 +73,7 @@ def on_message(client, userdata, msg):
     -------
     Nothing
     """
-    if msg.topic.decode() == "topic/status" and msg.payload.decode() == "Quit":
+    if msg.topic.decode() == "main/status" and msg.payload.decode() == "Quit":
         client.disconnect()
     else:
         message = msg.topic.decode().replace('/', '.') + ' ' + msg.payload.decode() + '\n'
@@ -82,6 +82,7 @@ def on_message(client, userdata, msg):
 
 # Connecting to MQTT message broker
 client = mqtt.Client()
+client.username_pw_set(mqtt_usr, mqtt_pwd)
 client.connect(mqtt_address, mqtt_port, 60)
 
 # Assigning actions (functions) to events
