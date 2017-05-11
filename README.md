@@ -93,3 +93,8 @@ With Grafana server up and running you just need to access
 `http://localhost:3000` and
 - Add Graphite as data source
 - Create your custom dashboards
+
+For grafana usage without using the GUI refer to these links:
+- [grafana-dashboard-builder](https://github.com/jakubplichta/grafana-dashboard-builder)
+- [grafcli](https://github.com/m110/grafcli)
+- [adding datasource](https://github.com/grafana/grafana/issues/1789)
