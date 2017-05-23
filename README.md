@@ -19,7 +19,7 @@ example paho mqtt:
 pip install paho-mqtt
 ```
 Then you just need to run `python subscriber.py` on the server and 
-`python publisher.py` on the sender machine.
+`python publisher.py` on the sender machine. (Arguments may be needed, see code for details)
 
 
 In order to correctly store and plot the information sent by the publisher you 

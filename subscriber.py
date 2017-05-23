@@ -55,8 +55,8 @@ def on_connect(client, userdata, flags, rc):
     Nothing
     """
     print("Connected with result code " + str(rc))
-    client.subscribe([("topic/#", 0),
-                      ("main/status", 0)])  # If you want you can subscribe to every CPU topic in this way: 'analytics/+/cpu'
+    client.subscribe([("topic/#", 0),  # If you want you can subscribe to every CPU topic in this way: 'analytics/+/cpu'
+                      ("main/#", 0)])
 
 
 def on_message(client, userdata, msg):
@@ -89,5 +89,5 @@ client.connect(mqtt_address, mqtt_port, 60)
 client.on_connect = on_connect
 client.on_message = on_message
 
-# Loops until a "client.disconnect() function is called
+# Loops until a "client.disconnect()" function is called
 client.loop_forever()
