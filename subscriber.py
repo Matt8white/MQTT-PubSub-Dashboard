@@ -4,8 +4,8 @@ import socket
 
 # Input parser
 parser = argparse.ArgumentParser()
-parser.add_argument('--mqtt_usr', type=str, default="test")
-parser.add_argument('--mqtt_pwd', type=str, default="acaproj")
+parser.add_argument('--mqtt_usr', type=str, default="")
+parser.add_argument('--mqtt_pwd', type=str, default="")
 parser.add_argument('--mqtt_address', type=str, default="localhost")
 parser.add_argument('--mqtt_port', type=int, default=1883)
 parser.add_argument('--carbon_address', type=str, default="127.0.0.1")

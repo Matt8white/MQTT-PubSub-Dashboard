@@ -5,9 +5,17 @@ used to track the performance of the sender. The information can be displayed in
 a dashboard using Grafana.
 
 ## Installation
-First of all you need to install an MQTT message broker
+
+For Linux
+
+Refer to these links:
+- [Link 1 (only graphite)](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-graphite-on-an-ubuntu-14-04-server)
+- [Link 2](https://www.linode.com/docs/uptime/monitoring/deploy-graphite-with-grafana-on-ubuntu-14-04)
+- [Link 3](https://community.rackspace.com/products/f/25/t/6800)
 
 For macOS
+
+First of all you need to install an MQTT message broker
 ```
 brew install mosquitto
 ```
