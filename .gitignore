@@ -20,3 +20,4 @@ output
 *.txt
 *.zip
 *.sh~
+*.sh
