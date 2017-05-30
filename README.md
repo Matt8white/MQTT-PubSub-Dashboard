@@ -6,7 +6,7 @@ a dashboard using Grafana.
 
 ## Installation
 
-###Linux
+### Linux
 
 Refer to these links:
 - [Link 1 (only graphite)](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-graphite-on-an-ubuntu-14-04-server)
@@ -21,7 +21,8 @@ wanted. (usage `python subscriber.py --mqtt_usr <your username> --mqtt_pwd <your
 
 Publisher.py can be modified in order to send different metrics to different topics 
 (usage `python publisher.py --mqtt_usr <your username> --mqtt_pwd <your password> --mqtt_address <your broker address>`)
-###macOS
+
+### macOS
 
 First of all you need to install an MQTT message broker
 ```
