@@ -126,7 +126,8 @@ sudo apt update && sudo apt install grafana
 ```
 
 Configure Grafana to use the PostgreSQL database created earlier, set the domain 
-and root_url, and set a strong admin password and secret key:
+and root_url, and set a strong admin password and secret key (You may also want 
+to disable the possibility for any user to create an account):
 
 in `/etc/grafana/grafana.ini`
 ```
@@ -150,6 +151,10 @@ root_url = %(protocol)s://%(domain)s/
 admin_user = admin
 admin_password = SecureAdminPass
 secret_key = somelongrandomstringkey
+
+[users]
+# disable user signup / registration
+allow_sign_up = false
 ```
 Start grafana server: 
 ```
