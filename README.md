@@ -1,21 +1,23 @@
 # MQTT-PubSub Dashboard
-Simple publisher-subscriber in python with the purpose of sending a machine diagnostic 
-remotely to a server which will store all the collected information in Graphite,
-used to track the performance of the sender. The information can be displayed in
-a dashboard using Grafana.
+Simple publisher-subscriber in python with the purpose of sending a machine 
+diagnostic remotely to a server which will store all the collected information 
+in Graphite, used to track the performance of the sender. The information can be 
+displayed in a dashboard using Grafana.
 
 ## Installation
 
 ### Linux
 
-Server side, we should update our local package index and install all the system packages required for working to graphite.
+Server side, we should update our local package index and install all the system 
+packages required for working to graphite.
 ```
 sudo apt update 
 sudo apt upgrade
 sudo apt install build-essential graphite-web graphite-carbon python-dev apache2 libapache2-mod-wsgi libpq-dev python-psycopg2
 ```
 #### Configure Carbon
-If you want to change the way whisper stores the data you can modify the file `/etc/carbon/storage-schemas.conf`:
+If you want to change the way whisper stores the data you can modify the file 
+`/etc/carbon/storage-schemas.conf`:
 ```
 [carbon]
 pattern = ^carbon\.
@@ -64,7 +66,7 @@ CREATE DATABASE graphite WITH OWNER graphite;
 ```
 #### Configure Graphite
 
-Update Graphite’s DATABASES dictionary definition with the settings for the 
+Update Graphite’s databases dictionary definition with the settings for the 
 PostgreSQL database created earlier by modifying `/etc/graphite/local_settings.py:
 ```
 DATABASES = {
@@ -161,8 +163,8 @@ sudo service grafana-server start
 Grafana needs to be reachable from the outside world so make sure port 3000 is 
 open on your firewall.
 
-Last thing to do is to log in with your admin account on Grafana and add your 
-data source previously set up. (This can be easily made following the Grafana GUI).
+Now you can log in with your admin account on Grafana and add your data source 
+previously set up. (This can be easily made following the Grafana GUI).
 
 #### Install MQTT broker
 
@@ -173,7 +175,8 @@ sudo apt install mosquitto mosquitto-clients
 
 Configure Mosquitto to use passwords. Mosquitto includes a utility to generate a 
 special password file called mosquitto_passwd. This command will prompt you to 
-enter a password for the specified username, and place the results in /etc/mosquitto/passwd.`
+enter a password for the specified username, and place the results in 
+`/etc/mosquitto/passwd`.
 ```
 sudo mosquitto_passwd -c /etc/mosquitto/passwd test
 ```
@@ -191,11 +194,10 @@ allow_anonymous false
 password_file /etc/mosquitto/passwd
 ```
 `allow_anonymous` false will disable all non-authenticated connections, and the 
-`password_file` line tells Mosquitto where to look for user and password information. `
-Save and exit the file.
+`password_file` line tells Mosquitto where to look for user and password 
+information. Save and exit the file.
 
 Now you need to restart Mosquitto.
-
 ```
 sudo systemctl restart mosquitto
 ```
