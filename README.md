@@ -86,7 +86,7 @@ Initlialize the database:
 ```
 sudo graphite-manage syncdb
 ```
-####Configure Apache for Graphite
+#### Configure Apache for Graphite
 Copy Graphite’s Apache config template into Apache’s sites-available directory:
 ```
 sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
