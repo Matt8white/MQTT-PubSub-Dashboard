@@ -62,7 +62,7 @@ CREATE USER graphite WITH PASSWORD 'password';
 CREATE DATABASE graphite WITH OWNER graphite;
 \q
 ```
-####Configure Graphite
+#### Configure Graphite
 
 Update Graphite’s DATABASES dictionary definition with the settings for the 
 PostgreSQL database created earlier by modifying `/etc/graphite/local_settings.py:
