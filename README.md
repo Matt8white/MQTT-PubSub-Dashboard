@@ -46,11 +46,6 @@ Lastly, you need start the carbon-cache service:
 ```
 sudo service carbon-cache start
 ```
-If you want you can set the service to run on boot by setting in 
-`/etc/default/graphite-carbon`:
-```
-CARBON_CACHE_ENABLED=true
-```
 
 #### Install and configure PostgreSQL
 Install PostgreSQL for the graphite-web application:
